@@ -2,7 +2,28 @@
   command = "npm run build"
   publish = "dist"
 
+# Old single page anchors and common guesses point to the new pages.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/waitlist"
+  to = "/book-a-call/"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/book-a-call/"
+  status = 301
+
+[[redirects]]
+  from = "/book"
+  to = "/book-a-call/"
+  status = 301
+
+[[redirects]]
+  from = "/how-it-works"
+  to = "/how-we-work/"
+  status = 301
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,16 +1,38 @@
-# React + Vite
+# Carbon Sponge website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Static multi-page site built with Vite, React and Tailwind CSS, deployed on Netlify.
 
-Currently, two official plugins are available:
+## Pages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| URL | HTML entry | Page component |
+| --- | --- | --- |
+| `/` | `index.html` | `src/pages/Home.jsx` |
+| `/how-we-work/` | `how-we-work/index.html` | `src/pages/HowWeWork.jsx` |
+| `/services/` | `services/index.html` | `src/pages/Services.jsx` |
+| `/about/` | `about/index.html` | `src/pages/About.jsx` |
+| `/book-a-call/` | `book-a-call/index.html` | `src/pages/BookACall.jsx` |
+| `/privacy/` | `privacy/index.html` | `src/pages/Privacy.jsx` |
+| 404 | `404.html` | `src/pages/NotFound.jsx` |
 
-## React Compiler
+Each HTML file holds that page's title, meta description, canonical URL and Open Graph tags.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Motion
 
-## Expanding the Oxlint configuration
+- GSAP + ScrollTrigger + SplitText for reveals, pinning and line drawing (`src/lib/motion.js`)
+- Lenis smooth scroll, synced to ScrollTrigger
+- Three.js particle field on the Home hero only, lazy loaded (`src/lib/particles.js`)
+- Everything falls back to simple fades with `prefers-reduced-motion`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Book a Call form
+
+The form posts to Netlify Forms (form name `book-a-call`, honeypot `bot-field`) and also emails
+each request to `tanner@carbonsponge.io` through FormSubmit. The first submission triggers a one-time
+activation email from FormSubmit to that inbox; click the link in it to start receiving requests.
+
+## Develop
+
+```
+npm install
+npm run dev
+npm run build
+```
